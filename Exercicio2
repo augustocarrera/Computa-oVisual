@@ -1,0 +1,43 @@
+Enunciado: 
+Agora que temos uma ideia do que é Computação Visual, faça uma pesquisa sobre aplicações de Computação Visual e, a partir do que você pesquisou, escolha pelo menos um exemplo de cada subárea (Computação Gráfica, Processamento de Imagens, Visão Computacional) que você gostou ou que chamou a sua atenção.
+
+Descreva cada aplicação entre 3-5 parágrafos ("começo, meio e fim"). Em seguida, explique porque você escolheu a aplicação.
+
+Lembre-se de incluir todas as referências consultadas (livros, links de artigos, vídeos, etc.).
+
+
+Aplicações de Computação Visual
+
+1. Computação Gráfica: Animação em filmes de animação
+
+A computação gráfica é amplamente utilizada na criação de animações em filmes de animação. Um exemplo marcante é o filme "Toy Story" da Pixar Animation Studios, lançado em 1995, que foi o primeiro longa-metragem totalmente produzido por computação gráfica. Nesse processo, os artistas modelam personagens e ambientes em software de modelagem 3D, aplicam texturas e iluminação para criar cenas realistas e, em seguida, utilizam softwares de animação para dar vida aos personagens. O resultado é uma animação fluida e imersiva que encanta públicos de todas as idades.
+
+Por que essa aplicação é interessante? A computação gráfica é essencial para a criação de mundos imaginários e personagens fantásticos que podem cativar e emocionar o público de uma maneira única. Além disso, o processo de produção envolve uma combinação de arte e tecnologia, onde os artistas têm a liberdade de explorar sua criatividade enquanto aproveitam as capacidades avançadas dos softwares de computação gráfica para dar vida às suas visões.
+
+Referências:
+
+Shirley, Peter, et al. "Fundamentals of Computer Graphics." CRC Press, 2019.
+Lasseter, John, director. "Toy Story." Pixar Animation Studios, 1995.
+2. Processamento de Imagens: Diagnóstico por imagem médica
+
+O processamento de imagens desempenha um papel crucial no diagnóstico médico por meio de imagens médicas, como radiografias, ressonâncias magnéticas (RM) e tomografias computadorizadas (TC). Por exemplo, no caso de uma tomografia computadorizada, algoritmos de processamento de imagens são usados para segmentar estruturas de interesse, como órgãos ou tumores, e para melhorar a qualidade da imagem, removendo ruídos e artefatos indesejados. Isso permite que os médicos visualizem com mais clareza as estruturas anatômicas e identifiquem possíveis doenças ou lesões.
+
+Por que essa aplicação é interessante? O processamento de imagens na área médica tem o potencial de salvar vidas, permitindo diagnósticos mais precisos e precoces. Além disso, a utilização de algoritmos avançados de processamento de imagens ajuda os profissionais de saúde a interpretar com mais eficácia as imagens médicas, proporcionando melhores resultados para os pacientes.
+
+Referências:
+
+Sonka, Milan, et al. "Image Processing, Analysis, and Machine Vision." Cengage Learning, 2014.
+Gonzalez, Rafael C., et al. "Digital Image Processing." Pearson Education, 2017.
+3. Visão Computacional: Reconhecimento facial em sistemas de segurança
+
+A visão computacional é frequentemente empregada em sistemas de segurança para reconhecimento facial, onde algoritmos são utilizados para identificar e verificar a identidade de indivíduos com base em características faciais únicas. Esses sistemas são amplamente utilizados em aeroportos, prédios governamentais e até mesmo em dispositivos móveis para desbloqueio facial. Os algoritmos de visão computacional analisam padrões como forma do rosto, disposição dos olhos e distância entre características faciais para identificar e autenticar uma pessoa.
+
+Por que essa aplicação é interessante? O reconhecimento facial é uma aplicação fascinante da visão computacional que tem implicações importantes em termos de segurança e conveniência. Ao automatizar o processo de identificação, esses sistemas podem melhorar a segurança em áreas sensíveis e simplificar tarefas cotidianas, como desbloquear um smartphone. No entanto, questões éticas e preocupações com privacidade também são levantadas, destacando a importância de um desenvolvimento responsável e regulamentação adequada.
+
+Referências:
+
+Szeliski, Richard. "Computer Vision: Algorithms and Applications." Springer, 2010.
+Turk, Matthew, and Alex Pentland. "Eigenfaces for recognition." Journal of Cognitive Neuroscience, vol. 3, no. 1, 1991, pp. 71-86.
+Escolha das aplicações:
+
+Escolhi essas aplicações porque cada uma delas demonstra o alcance e a importância da computação visual em diferentes domínios. A animação em filmes de animação ilustra como a computação gráfica pode ser usada para criar mundos imaginários e contar histórias emocionantes. O diagnóstico por imagem médica destaca o papel fundamental do processamento de imagens na área da saúde, contribuindo para diagnósticos mais precisos e tratamentos eficazes. Por fim, o reconhecimento facial em sistemas de segurança representa uma aplicação prática da visão computacional, com implicações significativas em termos de segurança e privacidade. Essas aplicações refletem a diversidade de campos em que a computação visual desempenha um papel crucial, desde entretenimento até medicina e segurança.
