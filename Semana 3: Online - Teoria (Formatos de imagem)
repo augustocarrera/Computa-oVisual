@@ -1,0 +1,16 @@
+
+O formato de arquivo de imagem PNG (Portable Network Graphics) é amplamente utilizado na web devido à sua capacidade de compressão sem perdas e suporte a transparência. O conteúdo do arquivo PNG é organizado em um formato estruturado que inclui um cabeçalho e chunks.
+
+O cabeçalho do arquivo PNG consiste em uma assinatura de 8 bytes que identifica o arquivo como um PNG. Esta assinatura é representada pelos valores hexadecimais 89 50 4E 47 0D 0A 1A 0A.
+
+Os dados principais do arquivo PNG são organizados em chunks. Cada chunk consiste em quatro partes: o comprimento dos dados do chunk, o tipo de chunk (como IHDR para cabeçalho, IDAT para dados de imagem, PLTE para paleta de cores, entre outros), os dados específicos do chunk e um valor de verificação de redundância cíclica (CRC) para verificar a integridade dos dados.
+
+Alguns dos tipos de chunks principais incluem o IHDR (Image Header), que contém informações sobre as características da imagem, como largura, altura, profundidade de bits, tipo de coloração e método de compressão; o IDAT (Image Data), que contém os próprios dados da imagem, comprimidos usando o algoritmo Deflate; o PLTE (Palette), que contém a paleta de cores utilizada se a imagem usar um esquema de cores indexadas; e o IEND (End), que marca o final do arquivo PNG.
+
+O PNG usa o algoritmo de compressão Deflate, que é uma combinação de LZ77 (Lempel-Ziv 1977) e Huffman coding, garantindo que a compressão seja sem perdas. Além disso, o PNG suporta transparência alfa, permitindo que partes da imagem sejam completamente transparentes através de um canal alfa adicional para cada pixel na imagem.
+
+fontes:
+
+Murray, J. D., & vanRyper, W. (1996). Encyclopedia of Graphics File Formats. O'Reilly Media. Link para a versão online
+PNG (Portable Network Graphics) Specification, Version 1.2. W3C Recommendation. Link
+ISO/IEC 15948:2003 - Information technology -- Computer graphics and image processing -- Portable Network Graphics (PNG): Functional specification.
