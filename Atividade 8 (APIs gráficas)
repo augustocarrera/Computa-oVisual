@@ -1,0 +1,232 @@
+Identificação do grupo:
+- Augusto Esteves Carrera, 10388323
+- Artur Valladares Hernandez Giacummo, 10389053
+- Henrique Lee Amorim, 10389994
+- Lorenzo Percussi, 10390618
+
+Uma breve descrição da API gráfica que você selecionou para a pesquisa;
+
+O OpenGL é uma API para criação de aplicações gráficas 2D e 3D. É uma interface de software para dispositivos de hardware. 
+Esta interface consiste em cerca de 150 comandos distintos usados para especificar os objetos e operações necessárias para produzir aplicativos tridimensionais interativos. 
+É uma biblioteca de rotinas gráficas e de modelagem, bi (2D) e tridimensional (3D), extremamente portável e rápida.
+
+Como a pipeline é documentada pelos desenvolvedores da API;
+
+A documentação inicia com uma visão geral da pipeline gráfica do OpenGL, explicando os principais componentes e estágios envolvidos no processo de renderização. Estes estágios de processos chamam o “pipeline” de renderização do OpenGL.
+Vertex Specification: Gera uma lista ordenada de vértices que definem os limites do primitivo. Pode-se definir outros atributos de vértice como cor, coordenadas de textura, etc. Posteriormente, esses dados são enviados e manipulados pelo pipeline.
+Vertex Shader: É um programa que manipula os dados do vértice. O objetivo final do vertex shader é calcular a posição final dos vértices. São executados uma vez para cada vértice que a GPU processa. 
+Tessellation: Etapa opcional que permite subdividir primitivas geométricas para maior detalhamento.
+Geometry Shader: Outra etapa opcional, que serve para pegar uma primitiva de entrada e gerar zero ou mais primitivas de saídas.
+Vertex Post-Processing: Etapa em que o usuário tem baixo ou nenhum controle sobre, a parte mais importante desta etapa é o Clipping. O recorte descarta a área de primitivos que ficam fora do volume de visualização.
+Primitive Assembly: Coleta os dados do vértice em uma sequência ordenada de primitivas simples.
+Rasterization: Explica como os vértices processados são convertidos em fragmentos dentro do espaço da tela.
+Fragmet Shader: Detalha como os fragmentos são processados, incluindo cálculos de cor, texturização e outros efeitos visuais.
+Per-sample Operations: Cada amostra gerada é processada individualmente. Essas operações permitem controle granular sobre como cada amostra contribui para a imagem final exibida na tela. As operações por amostra geralmente incluem testes de profundidade, testes de stencil, blending e outras manipulações de pixel
+
+Quais linguagens de shading (shaders) são suportadas pela API;
+A principal linguagem de shading suportada pelo OpenGL é a GSLS, pois é suportado diretamente pelo OpenGL sem necessidade de extensões.
+
+Um exemplo de código que demonstra o uso da API (pode ser um "Hello, World!" gráfico – renderizar um triângulo na tela);
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+#include <iostream>
+
+// Vertex Shader
+const char *vertexShaderSource = R"(
+    #version 330 core
+    layout (location = 0) in vec3 aPos;
+    void main() {
+        gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+    }
+)";
+
+// Fragment Shader
+const char *fragmentShaderSource = R"(
+    #version 330 core
+    out vec4 FragColor;
+    void main() {
+        FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
+    }
+)";
+
+int main() {
+    // Inicialização do GLFW
+    glfwInit();
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+    // Criação de uma janela
+    GLFWwindow *window = glfwCreateWindow(800, 600, "Hello OpenGL", NULL, NULL);
+    if (window == NULL) {
+        std::cout << "Failed to create GLFW window" << std::endl;
+        glfwTerminate();
+        return -1;
+    }
+    glfwMakeContextCurrent(window);
+
+    // Inicialização do GLEW
+    glewExperimental = GL_TRUE;
+    if (glewInit() != GLEW_OK) {
+        std::cout << "Failed to initialize GLEW" << std::endl;
+        return -1;
+    }
+
+    // Compilação e vinculação dos shaders
+    GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
+    glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
+    glCompileShader(vertexShader);
+    GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+    glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
+    glCompileShader(fragmentShader);
+    GLuint shaderProgram = glCreateProgram();
+    glAttachShader(shaderProgram, vertexShader);
+    glAttachShader(shaderProgram, fragmentShader);
+    glLinkProgram(shaderProgram);
+    glDeleteShader(vertexShader);
+    glDeleteShader(fragmentShader);
+
+    // Definição dos vértices do triângulo
+    float vertices[] = {
+        -0.5f, -0.5f, 0.0f,
+         0.5f, -0.5f, 0.0f,
+         0.0f,  0.5f, 0.0f
+    };
+
+    // Criação do buffer de vértices
+    GLuint VBO, VAO;
+    glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &VBO);
+    glBindVertexArray(VAO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
+
+    // Loop principal
+    while (!glfwWindowShouldClose(window)) {
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        // Renderização do triângulo
+        glUseProgram(shaderProgram);
+        glBindVertexArray(VAO);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+
+        glfwSwapBuffers(window);
+        glfwPollEvents();
+    }
+
+    // Limpeza
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &VBO);
+    glfwTerminate();
+    return 0;
+}
+
+Um exemplo de código que demonstra o uso da API (pode ser um "Hello, World!" gráfico – renderizar um triângulo na tela);
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+#include <iostream>
+
+// Vertex Shader
+const char *vertexShaderSource = R"(
+    #version 330 core
+    layout (location = 0) in vec3 aPos;
+    void main() {
+        gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+    }
+)";
+
+// Fragment Shader
+const char *fragmentShaderSource = R"(
+    #version 330 core
+    out vec4 FragColor;
+    void main() {
+        FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
+    }
+)";
+
+int main() {
+    // Inicialização do GLFW
+    glfwInit();
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+    // Criação de uma janela
+    GLFWwindow *window = glfwCreateWindow(800, 600, "Hello OpenGL", NULL, NULL);
+    if (window == NULL) {
+        std::cout << "Failed to create GLFW window" << std::endl;
+        glfwTerminate();
+        return -1;
+    }
+    glfwMakeContextCurrent(window);
+
+    // Inicialização do GLEW
+    glewExperimental = GL_TRUE;
+    if (glewInit() != GLEW_OK) {
+        std::cout << "Failed to initialize GLEW" << std::endl;
+        return -1;
+    }
+
+    // Compilação e vinculação dos shaders
+    GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
+    glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
+    glCompileShader(vertexShader);
+    GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+    glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
+    glCompileShader(fragmentShader);
+    GLuint shaderProgram = glCreateProgram();
+    glAttachShader(shaderProgram, vertexShader);
+    glAttachShader(shaderProgram, fragmentShader);
+    glLinkProgram(shaderProgram);
+    glDeleteShader(vertexShader);
+    glDeleteShader(fragmentShader);
+
+    // Definição dos vértices do triângulo
+    float vertices[] = {
+        -0.5f, -0.5f, 0.0f,
+         0.5f, -0.5f, 0.0f,
+         0.0f,  0.5f, 0.0f
+    };
+
+    // Criação do buffer de vértices
+    GLuint VBO, VAO;
+    glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &VBO);
+    glBindVertexArray(VAO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
+
+    // Loop principal
+    while (!glfwWindowShouldClose(window)) {
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        // Renderização do triângulo
+        glUseProgram(shaderProgram);
+        glBindVertexArray(VAO);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+
+        glfwSwapBuffers(window);
+        glfwPollEvents();
+    }
+
+    // Limpeza
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &VBO);
+    glfwTerminate();
+    return 0;
+}
+
+A descrição de um exemplo de aplicação que usa a API.
+
+O Counter-Strike é um dos jogos mais populares da história dos jogos de tiro em primeira pessoa (FPS). Embora não seja mais tão dependente do OpenGL quanto era no passado, o uso do OpenGL desempenhou um papel significativo em sua história. 
+As versões mais antigas do Counter-Strike, como o Counter-Strike 1.6 e anteriores, foram desenvolvidas em um momento em que o OpenGL era uma das principais APIs gráficas disponíveis para jogos em PCs. Nesses jogos mais antigos, o OpenGL era usado para renderizar os gráficos em 3D, incluindo modelos de personagens, armas, mapas e efeitos visuais.
