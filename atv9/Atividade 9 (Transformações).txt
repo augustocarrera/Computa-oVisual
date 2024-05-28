@@ -1,0 +1,41 @@
+Atividade 9 (Transformações)
+# Identificação do grupo:
+# - Augusto Esteves Carrera, 10388323
+# - Artur Valladares Hernandez Giacummom 10389053
+# - Lorenzo Percussi, 10390618
+# - Henrique Lee Amorim, 10389994
+
+Para modificar o programa original para exibir um cubo colorido girando continuamente em um ou mais eixos, precisamos fazer várias alterações e adições no código. Abaixo estão as etapas necessárias para alcançar esse objetivo:
+
+Definição dos vértices e cores do cubo:
+
+Precisamos substituir a definição dos vértices e cores do triângulo pelos vértices e cores do cubo.
+
+Os arrays vertices e colors foram modificados para definir as posições e cores de um cubo, com cada face tendo 6 vértices (2 triângulos).
+
+Modificação dos shaders:
+
+Os shaders estão corretos e não precisam de modificações, pois já lidam com a posição e cor dos vértices.
+
+Os arrays vertices e colors foram modificados para definir as posições e cores de um cubo, com cada face tendo 6 vértices (2 triângulos).
+
+Rotação contínua:
+
+Adicionar a lógica de rotação contínua dentro do loop principal de renderização.
+Alterações na configuração de buffers:
+
+Configurar os buffers de vértices e cores para armazenar os dados do cubo
+
+Alterações na configuração de buffers:
+
+O código foi ajustado para gerar e configurar dois VBOs, um para os vértices e outro para as cores.
+
+Projeção perspectiva:
+
+A matriz de projeção foi definida para ser uma perspectiva, dando um efeito 3D ao cubo.
+
+Referências
+Documentação do SDL: https://wiki.libsdl.org/
+Documentação do GLEW: http://glew.sourceforge.net/basic.html
+Documentação do OpenGL: https://www.khronos.org/opengl/
+Documentação do cglm: https://cglm.readthedocs.io/
